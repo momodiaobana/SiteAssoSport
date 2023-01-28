@@ -1,0 +1,81 @@
+/* Variables */
+:root {
+    --primary-color: #333;
+    --secondary-color: #555;
+    --text-color: #fff;
+}
+
+/* Navigation */
+.navbar {
+    background-color: var(--primary-color);
+    text-align: center;
+    position: relative;
+}
+
+.navbar ul {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.navbar li {
+    width: 25%; /* pour que les liens apparaissent sur une seule ligne */
+    text-align: center; /* pour aligner les liens au milieu */
+}
+
+.navbar a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1.2em;
+    padding: 1em 0;
+    display: block;
+}
+
+.navbar a:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Sous-menu */
+.navbar li ul.sous_menu {
+    display: none;
+    position: absolute;
+    background-color: var(--primary-color);
+    width: 100%;
+}
+
+.navbar li:hover ul.sous_menu {
+    display: block;
+}
+
+.navbar li ul.sous_menu li {
+    display: block;
+    float: none; /* pour que les liens apparaissent sur une seule colonne */
+}
+
+.navbar li ul.sous_menu li a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1.2em;
+    padding: 1em 0;
+    display: block;
+}
+
+.navbar li ul.sous_menu li a:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Bouton de connexion */
+.navbar .login-btn button {
+    height: 40px; /* pour adapter la taille de l'image */
+    width: 40px; /* pour adapter la taille de l'image */
+    border: none;
+    background: none; /* pour enlever l'arrière-plan du bouton */
+}
+
+.navbar .login-btn button img {
+    max-height: 100%; /* pour adapter la taille de l'image */
+    max-width: 100%; /* pour adapter la taille de l'image */
+}

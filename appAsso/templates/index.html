@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports website</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <ul class="items">
+        <li>
+          <a href="{% url 'index' %}" id="item1">Accueil</a>
+        </li>
+        <li>
+          <a href="basket.html" id="item2">Basket</a>
+        </li>
+        <li>
+          <a href="football.html" id="item3">Football</a>
+        </li>
+        <li>
+          <a href="#">Sports de combat</a>
+          <ul class="sous_menu">
+            <li>
+              <a href="judo.html">Judo</a>
+            </li>
+            <li>
+              <a href="taekwondo.html">Taekwondo</a>
+            </li>
+            <li>
+              <a href="karate.html">Karaté</a>
+            </li>
+            <li>
+              <a href="boxe.html">Boxe</a>
+            </li>
+          </ul>
+        </li>
+        <li class="login-btn">
+          <button>
+            <a href="login.html"><img src="https://static.vecteezy.com/ti/vecteur-libre/p2/566937-icone-de-personne-gratuit-vectoriel.jpg" alt="Se connecter/S'inscrire"></a>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <!-- Main content of the page -->
+  </main>
+</body>
+</html>
