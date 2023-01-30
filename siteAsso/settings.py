@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -75,17 +74,18 @@ WSGI_APPLICATION = 'siteAsso.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    'default' : {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'DBASSO',
-        'USER' : "root",
-        'PASSWORD' : "Fada16dati",
-        'HOST' : '127.0.0.1',
-        'PORT' : '3306',
-    },
-    'sqlite' : {
-        'ENGINE' : 'django.db.backends.sqlite3',
-        'NAME' : BASE_DIR / 'db.sqlite3',
+    #'default' : {
+        # 'ENGINE': 'django.db.backends.mysql',
+        # 'NAME': 'DBASSO',
+        # 'USER' : "root",
+        # 'PASSWORD' : "Fada16dati",
+        # 'HOST' : '127.0.0.1',
+        # 'PORT' : '3306',
+    #},
+    #'sqlite'# : {
+    "default" : {
+        "ENGINE" : "django.db.backends.sqlite3",
+        "NAME" : BASE_DIR / "db.sqlite3",
     }
 }
 

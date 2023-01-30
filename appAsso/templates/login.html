@@ -1,0 +1,33 @@
+{% extends 'base.html'%}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width={device-width}, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/styleSingup.css">
+</head>
+<body>
+    {% block content %}
+    <h1>Se connecter</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <p>
+            <label for="username">Username or Email:</label>
+            <input type="text" id="username" name="username" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
+        </p>
+        <p>
+            <label for="password">Mot de passe</label>
+            <input id ="password" type="text" name="password">
+        </p>
+        <button type="submit">Valider</button>
+    </form>
+    <p>
+        <a href="{% url 'signup' %}" style="text-decoration: none;"> <h4>S'inscrire</h4></a>
+    </p>
+    {% endblock %}
+</body>
+</html>
