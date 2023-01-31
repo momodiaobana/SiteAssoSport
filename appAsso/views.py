@@ -1,6 +1,10 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from django.contrib.auth import login, logout, authenticate, get_user_model
+from django.contrib import messages
+
 # Create your views here.
+
 
 
 
@@ -19,6 +23,8 @@ def index(request):
 
 def signup(request):
     if request.method == 'POST':
+        if request.user.is_authenticated:
+            return redirect('userLogin')
         fname = request.POST.get('fname')
         lname = request.POST.get('lname')
         username = request.POST.get('username')
@@ -26,22 +32,20 @@ def signup(request):
         password = request.POST.get('password')
         utilisateur = user.objects.create_user(first_name = fname, last_name = lname, username = username, email = email, password = password)
         login(request, utilisateur)
-        return redirect('base')
+        return redirect('index')
     return render(request, "signup.html")
 
 
-def login(request):
-    if request.method == 'POST' :
-        username = request.POST.get('username')
-        email = request.POST.get('email')
+
+def userLogin(request):
+    if request.method == 'POST':
+        username_or_email = request.POST.get('username')
         password = request.POST.get('password')
-        if username : 
-            utilisateur = authenticate(username = username, password = password)
-        elif email: 
-            utilisateur = authenticate(email = email, password = password)
-        if utilisateur : 
-            login(request, utilisateur)
-            return redirect('base')
-        else : 
-           return HttpResponse("<script>alert('Identifiants incorrectes')</script>")
-    return render(request, "login.html")
+        user = authenticate(username=username_or_email, password=password) or \
+               authenticate(email=username_or_email, password=password)
+        if user:
+            login(request, user)
+            return redirect('index')
+        else:
+            messages.error(request, 'Les informations d\'identification sont incorrectes')
+    return render(request, 'userLogin.html')

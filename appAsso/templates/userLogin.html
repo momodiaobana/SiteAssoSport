@@ -2,32 +2,38 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width={device-width}, initial-scale=1.0">
-    <title>Document</title>
+    <title>Se connecter</title>
     <link rel="stylesheet" href="/static/styleSingup.css">
 </head>
 <body>
     {% block content %}
     <h1>Se connecter</h1>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-danger"><a href="{% url 'signup' %}" style="text-decoration: none; color: black;"> <h4>{{ message }}. Voulez-vous vous inscrire?</h4></a>
+                
+            </div>
+
+        {% endfor %}
+    {% endif %}
     <form method="POST">
         {% csrf_token %}
         <p>
-            <label for="username">Username or Email:</label>
-            <input type="text" id="username" name="username" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
+            <label for="username">Nom d'utilisateur ou Adresse email:</label>
+            <input type="text" id="username" name="username">
         </p>
         <p>
             <label for="password">Mot de passe</label>
-            <input id ="password" type="text" name="password">
+            <input id="password" type="password" name="password">
         </p>
         <button type="submit">Valider</button>
     </form>
-    <p>
-        <a href="{% url 'signup' %}" style="text-decoration: none;"> <h4>S'inscrire</h4></a>
-    </p>
+
     {% endblock %}
 </body>
 </html>

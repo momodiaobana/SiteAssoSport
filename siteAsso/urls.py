@@ -15,14 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from appAsso.views import index, login, signup, base
+from appAsso.views import index, userLogin, signup, base
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 
 urlpatterns = [
      path('', index, name='index'),
      path('', base, name='base'),
-     path('login/', login, name='login'),
+     path('userLogin/', userLogin, name='userLogin'),
      path('signup/', signup, name='signup'),
     path('admin/', admin.site.urls),
    
