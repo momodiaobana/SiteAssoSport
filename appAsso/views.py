@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import login, logout, authenticate, get_user_model
 from django.contrib import messages
-
+from .models import boxeP
 # Create your views here.
 
 
@@ -48,4 +48,20 @@ def userLogin(request):
             return redirect('index')
         else:
             messages.error(request, 'Les informations d\'identification sont incorrectes')
-    return render(request, 'userLogin.html')
+    return render(request, "userLogin.html")
+
+
+
+
+def boxe(request):
+    #boxeP("gants", 10).save()
+    #boxeP.objects.all()
+
+    return render(request, 'boxe.html')
+
+
+def foot(request):
+    return render(request, 'foot.html')
+
+def basket(request):
+    return render(request, 'basket.html')

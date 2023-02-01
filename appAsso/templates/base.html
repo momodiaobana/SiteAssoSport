@@ -11,30 +11,16 @@
     <nav class="navbar">
       <ul class="items">
         <li>
-          <a href="{% url 'index' %}" id="item1">Accueil</a>
+          <a href="{% url 'index' %}" id="item1">Statistiques</a>
         </li>
         <li>
-          <a href="basket.html" id="item2">Basket</a>
+          <a href="{% url 'basket' %}" id="item2">Basket</a>
         </li>
         <li>
-          <a href="football.html" id="item3">Football</a>
+          <a href="{% url 'foot' %}" id="item3">Football</a>
         </li>
         <li>
-          <a href="#">Sports de combat</a>
-          <ul class="sous_menu">
-            <li>
-              <a href="judo.html">Judo</a>
-            </li>
-            <li>
-              <a href="taekwondo.html">Taekwondo</a>
-            </li>
-            <li>
-              <a href="karate.html">Karaté</a>
-            </li>
-            <li>
-              <a href="boxe.html">Boxe</a>
-            </li>
-          </ul>
+          <a href="{% url 'boxe' %}">Boxe</a>
         </li>
         <li class="login-btn">
           <button>
@@ -45,6 +31,8 @@
     </nav>
   </header>
   {% block content %}
+
+  
   {% endblock %}
 <footer>
   <p>Copyright © 2021 Sports website</p>
