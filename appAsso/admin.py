@@ -1,8 +1,5 @@
 from django.contrib import admin
-from .models import Stock, boxeP, footP, basketP
+from .models import *
 # Register your models here.
 
-admin.site.register(Stock)
-admin.site.register(boxeP)
-admin.site.register(footP)
-admin.site.register(basketP)
+admin.site.register(Products)

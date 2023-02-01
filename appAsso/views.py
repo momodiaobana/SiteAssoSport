@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import login, logout, authenticate, get_user_model
 from django.contrib import messages
-from .models import boxeP
+from .models import Products
 # Create your views here.
 
 
@@ -54,10 +54,8 @@ def userLogin(request):
 
 
 def boxe(request):
-    #boxeP("gants", 10).save()
-    #boxeP.objects.all()
-
-    return render(request, 'boxe.html')
+    boxep = Products.objects.filter(cProduit = "BOXE")
+    return render(request, 'boxe.html',{'boxep': boxep})
 
 
 def foot(request):
@@ -65,3 +63,7 @@ def foot(request):
 
 def basket(request):
     return render(request, 'basket.html')
+
+
+def adProduct(request):
+    pass

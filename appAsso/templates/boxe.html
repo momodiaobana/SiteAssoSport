@@ -11,10 +11,46 @@
 </head>
 <body>
     {% block content %}
-        {% for boxp in  %}
+    <h3>PRODUITS</h3>
+        <table>
+            <tr>
+                <td>Nom</td>
+                <td>Prix</td>
+            </tr>
+            {% for product in boxep %}
+               
+                    <tr>
+                        
+                        <td>
+                            {{ product.nomProduit }}
+                        </td>
+                        <td>
+                            {{ product.prix }}
+                        </td>
+                        <td>
+                            {{ product.quantite }}
+                        </td>
+                       
+                       
+                    </tr>
+                    {% endfor %}
             
-        {% endfor %}
+        </table>
+        
+        
 
+    
+
+    <h1>Ajout de produit</h1>
+    <form method="POST">
+        <label for="nom">Nom du produit:</label>
+        <input type="text" id="nom" name="nom"><br><br>
+        <label for="description">Description:</label>
+        <textarea id="description" name="description"></textarea><br><br>
+        <label for="prix">Prix:</label>
+        <input type="number" id="prix" name="prix"><br><br>
+        <input type="submit" value="Ajouter">
+    </form>
     {% endblock %}
     
 </body>

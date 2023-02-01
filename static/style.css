@@ -149,3 +149,6 @@ footer {
         width: 100%; /* pour que le bout*/
     }
 }
+tr{
+    font-weight: bolder;
+}

@@ -16,8 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from appAsso.views import index, userLogin, signup, base, foot, basket, boxe
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns, static
+from . import settings
 
 urlpatterns = [
     path('', index, name='index'),
@@ -28,4 +28,4 @@ urlpatterns = [
     path('foot/', foot, name='foot'),
     path('boxe/', boxe, name='boxe'),
     path('admin/', admin.site.urls),
-] + staticfiles_urlpatterns()
+] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
