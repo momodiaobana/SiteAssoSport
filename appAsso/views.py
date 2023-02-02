@@ -54,7 +54,7 @@ def userLogin(request):
 
 
 def boxe(request):
-    boxep = Products.objects.filter(cProduit = "BOXE")
+    boxep = Products.objects.filter(cProduit = "boxe")
     return render(request, 'boxe.html',{'boxep': boxep})
 
 
