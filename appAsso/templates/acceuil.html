@@ -162,8 +162,9 @@
               </thead>
               <tbody class="bodytab">
                   {% for item in items %}
+               
                   <tr>
-                      <th scope="row">#</th>
+                      <th scope="row" style="color:white">{{ item.id }}</th>
                       <td style="color:white">{{ item.nomProduit }}</td>
                       <td style="color:white">{{ item.prix}} €</td>
                       <td style="color:white">{{ item.cProduit}}</td>
