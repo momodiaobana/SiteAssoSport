@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import login, logout, authenticate, get_user_model
 from django.contrib import messages
-from .models import Products
+from .models import Products #import de la base product venant du modele 
 # Create your views here.
 
 
@@ -18,7 +18,9 @@ def base(request):
     return render(request, "base.html")
 
 def index(request):
-    return render(request, "acceuil.html")
+    count = Products.objects.all().count()
+    context = {'count': count}
+    return render(request, "acceuil.html", context)
 
 
 def signup(request):

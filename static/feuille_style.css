@@ -1,0 +1,73 @@
+
+.navbar .navbar-nav .nav-link:hover {
+    color : black;
+}
+
+.navbar .navbar-nav .nav-link {
+    color: black;
+    font-size: 1.1em;
+}
+
+
+@media only screen and (min-width: 992px) {
+    .navbar {
+        padding: 0;
+    }
+    .navbar .navbar-brand {
+        padding: 0 0.7em;
+    }
+    .navbar .navbar-nav .nav-link {
+        padding: 1em 0;
+    }
+    .navbar .navbar-nav .nav-item {
+        margin:  0 8em; /*0 1em;*/
+    }
+}
+
+.navbar .navbar-nav .nav-item {
+    position: relative;
+}
+
+.navbar .navbar-nav .nav-item::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-color: black;
+    width: 0%;
+    content: "";
+    height: 4px;
+}
+
+
+.navbar .navbar-nav .nav-item:hover::after {
+    width: 100%;
+}
+
+.navbar .navbar-nav .nav-item::after {
+    transition: all 0.5s;
+}
+
+
+.navbar .nav-item{
+    font-size: 15px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.navbar .login-btn{
+    width: 10px; 
+    height: 10px; 
+    position: relative; 
+    padding-left: 10%;
+    padding-top: 1%;
+}
+
+
+
+
+
+/**/
+.table tr{
+    color:white;
+}
