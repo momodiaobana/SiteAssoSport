@@ -12,21 +12,18 @@
 <body>
    
     {% block content %}
-    <h1>Ajout de produit</h1>
-    <form method="POST">
-        <label for="nom">Nom du produit:</label>
-        <input type="text" id="nom" name="nom"><br><br>
-        <label for="description">Description:</label>
-        <textarea id="description" name="description"></textarea><br><br>
-        <label for="prix">Prix:</label>
-        <input type="number" id="prix" name="prix"><br><br>
-        <input type="submit" value="Ajouter">
-    </form>
+    <br><br><br><br>
+    
     <!-- TEST FONCTIONNALITE RECHERCHE -->
-    <form method="get">
-        <input type="text" name="search" />
-        <button type="submit">Search</button>
-    </form>
+    <h1>Rechercher produit</h1>
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid" style="background-color: black;">
+          <form class="d-flex" role="search" method="get">
+            <input class="form-control me-2" type="search" name="search" placeholder="Trouver des articles" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
 
     {% if post %}
     {% for matos in post %}
@@ -38,6 +35,20 @@
     <p style="color:white;"> Article introuvable </p>
 
     {% endif %}
+
+    <h1>Ajout de produit</h1>
+    <form method="POST">
+        <label for="nom">Nom du produit:</label>
+        <input type="text" id="nom" name="nom"><br><br>
+        <label for="description">Description:</label>
+        <textarea id="description" name="description"></textarea><br><br>
+        <label for="prix">Prix:</label>
+        <input type="number" id="prix" name="prix"><br><br>
+        <input type="submit" value="Ajouter">
+    </form>
+
+
+
     {% endblock %}
 
 

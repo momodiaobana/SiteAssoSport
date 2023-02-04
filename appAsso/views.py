@@ -96,31 +96,40 @@ def boxe(request):
     #provisoire  
     if request.method == 'GET':
         search = request.GET.get('search')
-        post = Products.objects.all().filter(cProduit="boxe").filter(nomProduit=search)
-        return render(request, 'boxe.html', {'post': post})
-
-
+        post = Products.objects.filter(cProduit="boxe").filter(nomProduit=search)
+        context['post'] = post #merci à chatGPT pour cette ligne qui change tout 
+    
     return render(request, 'boxe.html',context)
 
 
 def foot(request):
 
+    footp = Products.objects.filter(cProduit ="foot")
+    context = {
+        'footp':footp
+    }
     #rechercher des elements à travers la barre de recherche 
     if request.method == 'GET':
         search = request.GET.get('search')
         post = Products.objects.all().filter(cProduit="foot").filter(nomProduit=search)
-        return render(request, 'foot.html', {'post': post})
+        return render(request, 'foot.html', {'post': post}) #Le return n'est pas efficace si la page doit afficher des elements de la base 
 
 
-    return render(request, 'foot.html')
+    return render(request, 'foot.html', context)
 
 def basket(request):
+
+    basketp = Products.objects.filter(cProduit ="basket")
+    context = {
+        'basketp':basketp
+    }
+
     #rechercher des elements à travers la barre de recherche 
     if request.method == 'GET':
         search = request.GET.get('search')
         post = Products.objects.all().filter(cProduit="basket").filter(nomProduit=search)
         return render(request, 'basket.html', {'post': post})
-    return render(request, 'basket.html')
+    return render(request, 'basket.html', context)
 
 
 def adProduct(request):
