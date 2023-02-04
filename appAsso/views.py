@@ -89,13 +89,37 @@ def userLogin(request):
 
 def boxe(request):
     boxep = Products.objects.filter(cProduit = "boxe")
-    return render(request, 'boxe.html',{'boxep': boxep})
+    context = {
+        'boxep': boxep
+        }
+
+    #provisoire  
+    if request.method == 'GET':
+        search = request.GET.get('search')
+        post = Products.objects.all().filter(cProduit="boxe").filter(nomProduit=search)
+        return render(request, 'boxe.html', {'post': post})
+
+
+    return render(request, 'boxe.html',context)
 
 
 def foot(request):
+
+    #rechercher des elements à travers la barre de recherche 
+    if request.method == 'GET':
+        search = request.GET.get('search')
+        post = Products.objects.all().filter(cProduit="foot").filter(nomProduit=search)
+        return render(request, 'foot.html', {'post': post})
+
+
     return render(request, 'foot.html')
 
 def basket(request):
+    #rechercher des elements à travers la barre de recherche 
+    if request.method == 'GET':
+        search = request.GET.get('search')
+        post = Products.objects.all().filter(cProduit="basket").filter(nomProduit=search)
+        return render(request, 'basket.html', {'post': post})
     return render(request, 'basket.html')
 
 

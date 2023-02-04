@@ -11,7 +11,38 @@
 </head>
 <body>
     {% block content %}
+    <h1>Ajout de produit</h1>
+    <form method="POST">
+        <label for="nom">Nom du produit:</label>
+        <input type="text" id="nom" name="nom"><br><br>
+        <label for="description">Description:</label>
+        <textarea id="description" name="description"></textarea><br><br>
+        <label for="prix">Prix:</label>
+        <input type="number" id="prix" name="prix"><br><br>
+        <input type="submit" value="Ajouter">
+    </form>
+    <!-- TEST FONCTIONNALITE RECHERCHE -->
+    <form method="get">
+        <input type="text" name="search" />
+        <button type="submit">Search</button>
+    </form>
+
+    {% if post %}
+    {% for matos in post %}
+    <p style="color:white;">{{matos.nomProduit}} {{matos.prix}}</p>
+
+    {% endfor %}
+
+    {% else %}
+    <p style="color:white;"> Article introuvable </p>
+
+    {% endif %}
     {% endblock %}
+
+
+
+
+   
     
 </body>
 </html>
