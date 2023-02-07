@@ -14,73 +14,77 @@
 <body>
     {% block content %}
 
-    <br><br><br>
-    <!-- TEST FONCTIONNALITE RECHERCHE -->
 
+    <br><br><br><br>
+    <!-- TEST FONCTIONNALITE RECHERCHE -->
     <div class="container">
         <h1>Rechercher produit</h1>
-        <nav class="navbar bg-body-tertiary">
+        <nav class="navbar" style="background-color: black;">
             <div class="container-fluid" style="background-color: black;">
                 <form class="d-flex" role="search" method="get">
                     <input class="form-control me-2" type="search" name="search" placeholder="Trouver des articles"
                         aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Rechercher</button>
+                    <a class="btn btn-outline-success" href="{% url 'add' %}" style="margin-left: 10px;"
+                        type="submit">Ajouter</a>
                 </form>
 
             </div>
         </nav>
 
         {% if post %}
-
         {% for matos in post %}
         <!-- remplacer p par une card avec image + description et prix du produit -->
-        <p style="color:white;">{{matos.nomProduit}} {{matos.prix}}</p>
+        <!--<p style="color:white;">{{matos.nomProduit}} {{matos.prix}}</p>-->
+        <br><br>
+        <div class="card" style="width: 18rem;">
+            <img src="{% static 'media/test.jpg'%}" class="card-img-top" alt="image">
+            <div class="card-body">
+                <h5 class="card-title">{{ matos.nomProduit }}</h5>
+                <p class="card-text">Prix : {{matos.prix}} €</p>
+                <a href="#" class="btn btn-succes">Modifier</a>
+            </div>
+        </div>
+        <br>
+
 
         {% endfor %}
 
         {% else %}
+        <br>
         <p style="color:white;"> Article introuvable </p>
 
         {% endif %}
 
-        <h3>PRODUITS</h3>
-    <table>
-        <tr>
-            <td>Nom</td>
-            <td>Prix</td>
-        </tr>
-        {% for product in boxep %}
 
-        <tr>
+        <div class="row">
+            <div class="container">
+                <h3>PRODUITS</h3>
+                {% if boxep %}
+                {% for product in boxep %}
+                <div class="card " style="width: 18rem; margin-left: 20px; margin-top: 20px;">
+                    <img src="{% static 'media/test.jpg'%}" class="card-img-top" alt="image"
+                        style="margin-left: auto; margin-right: auto;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{product.nomProduit}}</h5>
+                        <p class="card-text">{{product.prix}} €</p>
+                        <a href="#" class="btn btn-success">modifier</a>
+                        <a href="{% url 'deleteItem' id=product.id %}" class="btn btn-danger"
+                            style="margin-left: 40px;">supprimer🚮</a>
+                    </div>
+                </div>
+                {% endfor %}
 
-            <td>
-                {{ product.nomProduit }}
-            </td>
-            <td>
-                {{ product.prix }}
-            </td>
-            <td>
-                {{ product.quantite }}
-            </td>
+                {% else %}
+                <br>
+                <p style="color:white;"> Aucun article trouvé</p>
 
+                {% endif %}
 
-        </tr>
-        {% endfor %}
+            </div>
+        </div>
+        <br>
 
-    </table>
-
-     <!-- idée : mettre un bouton a la place puis créer une page pour ajouter les articles -->
-     <h1>Ajout de produit</h1>
-     <form method="POST">
-         <label for="nom">Nom du produit:</label>
-         <input type="text" id="nom" name="nom"><br><br>
-         <label for="description">Description:</label>
-         <textarea id="description" name="description"></textarea><br><br>
-         <label for="prix">Prix:</label>
-         <input type="number" id="prix" name="prix"><br><br>
-         <input type="submit" value="Ajouter">
-     </form>
- 
 
     </div>
 

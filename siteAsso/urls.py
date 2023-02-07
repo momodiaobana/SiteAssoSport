@@ -15,17 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from appAsso.views import index, userLogin, signup, base, foot, basket, boxe
+from appAsso.views import index, userLogin, signup, base, foot, basket, boxe, deleteItem, add
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns, static
 from . import settings
 
 urlpatterns = [
     path('', index, name='index'),
     path('', base, name='base'),
+    path('add/', add, name='add'),
     path('userLogin/', userLogin, name='userLogin'),
     path('signup/', signup, name='signup'),
     path('basket/', basket, name='basket'),
     path('foot/', foot, name='foot'),
     path('boxe/', boxe, name='boxe'),
     path('admin/', admin.site.urls),
+    path('deleteItem/<int:id>/', deleteItem, name = 'deleteItem'), 
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

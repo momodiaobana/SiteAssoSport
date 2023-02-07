@@ -13,7 +13,16 @@ from django.db.models import Sum
 user = get_user_model()
 
 
+def add(request): 
+    if request.method == 'POST':
+        nomProduit = request.POST['nomProduit']
+        prix = request.POST['prix']
+        cProduit = request.POST['cProduit']
 
+        newProduct = Products(nomProduit = nomProduit, prix=prix, cProduit = cProduit)
+        newProduct.save()
+
+    return render(request, "add.html", {})
 
 def base(request):
     return render(request, "base.html")
@@ -28,8 +37,10 @@ def index(request):
     valeur_totale_stock = sum(items.values_list('prix', flat=True))
 
     ##### prix moyen du stock
-    prix_moyen = valeur_totale_stock / count_all_items
-
+    if count_all_items > 0:
+        prix_moyen = valeur_totale_stock / count_all_items
+    else: 
+        prix_moyen = 0
     ##### valeur du stock des articles de boxe 
     boxe_items = Products.objects.filter(cProduit = "boxe")
     valeur_stock_boxe = sum(boxe_items.values_list('prix', flat=True))
@@ -112,9 +123,8 @@ def foot(request):
     if request.method == 'GET':
         search = request.GET.get('search')
         post = Products.objects.all().filter(cProduit="foot").filter(nomProduit=search)
-        return render(request, 'foot.html', {'post': post}) #Le return n'est pas efficace si la page doit afficher des elements de la base 
-
-
+        context['post'] = post
+        
     return render(request, 'foot.html', context)
 
 def basket(request):
@@ -128,9 +138,23 @@ def basket(request):
     if request.method == 'GET':
         search = request.GET.get('search')
         post = Products.objects.all().filter(cProduit="basket").filter(nomProduit=search)
-        return render(request, 'basket.html', {'post': post})
+        context['post'] = post
     return render(request, 'basket.html', context)
 
 
+#supprimer un element de la base
+def deleteItem(request, id): 
+    item = Products.objects.get(id = id)
+    item.delete()
+    return redirect('index')
+
+
+def editBoxeItem(request, id): 
+    item = Products.objects.get(id=id)
+    return redirect('index')
+
+#page ajoue de produit 
 def adProduct(request):
     pass
+
+
