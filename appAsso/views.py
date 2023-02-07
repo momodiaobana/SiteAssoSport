@@ -4,21 +4,18 @@ from django.contrib.auth import login, logout, authenticate, get_user_model
 from django.contrib import messages
 from .models import Products #import de la base product venant du modele 
 from django.db.models import Sum
+from django.contrib.auth.decorators import login_required
 # Create your views here.
-
-
-
 
 
 user = get_user_model()
 
-
+@login_required
 def add(request): 
     if request.method == 'POST':
         nomProduit = request.POST['nomProduit']
         prix = request.POST['prix']
         cProduit = request.POST['cProduit']
-
         newProduct = Products(nomProduit = nomProduit, prix=prix, cProduit = cProduit)
         newProduct.save()
 
@@ -27,6 +24,7 @@ def add(request):
 def base(request):
     return render(request, "base.html")
 
+@login_required
 def index(request):
     count_all_items = Products.objects.all().count()
     count_boxe_items = Products.objects.filter(cProduit = "boxe").count()
@@ -95,9 +93,7 @@ def userLogin(request):
             messages.error(request, 'Les informations d\'identification sont incorrectes')
     return render(request, "userLogin.html")
 
-
-
-
+@login_required
 def boxe(request):
     boxep = Products.objects.filter(cProduit = "boxe")
     context = {
@@ -112,9 +108,8 @@ def boxe(request):
     
     return render(request, 'boxe.html',context)
 
-
+@login_required
 def foot(request):
-
     footp = Products.objects.filter(cProduit ="foot")
     context = {
         'footp':footp
@@ -127,6 +122,7 @@ def foot(request):
         
     return render(request, 'foot.html', context)
 
+@login_required
 def basket(request):
 
     basketp = Products.objects.filter(cProduit ="basket")
@@ -149,12 +145,17 @@ def deleteItem(request, id):
     return redirect('index')
 
 
-def editBoxeItem(request, id): 
-    item = Products.objects.get(id=id)
-    return redirect('index')
-
-#page ajoue de produit 
-def adProduct(request):
-    pass
-
+def edit(request, id):
+    items = Products.objects.get(id = id)
+    label = {
+        'nomProduit':'',
+        'prix':'',
+        'cProduit':'',
+    }
+    
+    context = {
+        'items' : items,
+        'label':label
+    }
+    return render(request, 'edit.html', context)
 

@@ -41,7 +41,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{ matos.nomProduit }}</h5>
                 <p class="card-text">Prix : {{matos.prix}}</p>
-                <a href="#" class="btn btn-primary">Modifier</a>
+                <a href="{% url 'edit' %}" class="btn btn-primary">Modifier</a>
             </div>
         </div>
         <br>
@@ -65,7 +65,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{product.nomProduit}}</h5>
                         <p class="card-text">{{product.prix}}</p>
-                        <a href="#" class="btn btn-success">modifier</a>
+                        <a href="{% url 'edit' %}" class="btn btn-success">modifier</a>
                         <a href="{% url 'deleteItem' id=product.id %}" class="btn btn-danger"
                             style="margin-left: 40px;">supprimer🚮</a>
                     </div>
