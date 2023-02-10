@@ -12,13 +12,39 @@
     
 </head>
 <body style="background-color: black;">
+
+    <style>
+        .logout-btn li {
+           display: none;
+        }
+  
+        .logout-btn:hover li {
+           display: block;
+        }
+
+        .login-btn li {
+           display: none;
+        }
+  
+        .login-btn:hover li {
+           display: block;
+        }
+       
+  
+     </style>
+
+
+
+
+
+
   <header>
     <nav class="navbar navbar-expand-lg  fixed-top" style="background-color: white">
       <div class="container">
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
               <ul class="navbar-nav mynavbar ml-auto">
                   <li class="nav-item">
-                      <a class="nav-link active " aria-current="page" href="{% url 'index' %}" style="color: black; ">Statistiques</a>
+                      <a class="nav-link active " aria-current="page" href="{% url 'accueil' %}" style="color: black; ">Statistiques</a>
                   </li>
 
                   <li class="nav-item">
@@ -31,13 +57,25 @@
                   <li class="nav-item">
                       <a class="nav-link " id="" data-bs-toggle="dropdown" href="{% url 'boxe' %}" style="color: black ; ">Boxe</a>
                   </li>
-
+                  {% if user.is_authenticated %}
+                  <ul class="logout-btn">
+                     <button>
+                     <a href=""><img src="https://static.vecteezy.com/ti/vecteur-libre/p2/566937-icone-de-personne-gratuit-vectoriel.jpg" alt="Se connecter/S'inscrire" style="width: 10px; height: 10; position: relative; padding-left: 10%;"></a>
+                     </button>
+                     <li>
+                        <a data-bs-toggle="dropdown" href="{% url 'userLogout' %}" style="text-decoration: none; color: black;">Déconnexion</a>
+                     </li>
+                     <li>
+                        <a data-bs-toggle="dropdown" href="{% url 'profil' %}" style="text-decoration: none;color: black;">Profil</a>
+                     </li>
+                  </ul>
+               {% else %}
                   <li class="login-btn">
-                      <button>
-                        <a href="{% url 'userLogin' %}"><img src="https://static.vecteezy.com/ti/vecteur-libre/p2/566937-icone-de-personne-gratuit-vectoriel.jpg" alt="Se connecter/S'inscrire" style="width: 10px; height: 10; position: relative; padding-left: 10%;"></a>
-                      </button>
-                    </li>
-
+                     <button>
+                     <a href="{% url 'userLogin' %}"><img src="https://static.vecteezy.com/ti/vecteur-libre/p2/566937-icone-de-personne-gratuit-vectoriel.jpg" alt="Se connecter/S'inscrire" style="width: 10px; height: 10; position: relative; padding-left: 10%;"></a>
+                     </button>
+                  </li>
+               {% endif %}
               </ul>
           </div>
       </div>
@@ -48,7 +86,8 @@
   
   {% endblock %}
 <footer>
-  <p>Copyright © 2023 Gestport.</p>
+  <p>Made by : Eddy and Mouhamed Mountaga DIAO</p>
+
 </footer>
 </body>
 </html>

@@ -1,18 +1,17 @@
-{% extends 'base.html'%}
-{% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>S'inscrire</title>
+    <title>Document</title>
 </head>
 <body>
-    {% block content %}
-    <h1>S'inscrire</h1>
-    <form method="POST">
+    <h1>MISE A JOURS DES INFORMATIONS PERSONNELLES</h1>
+    <a href="{% url 'accueil' %}">Accueil</a>
+    <a href="{% url 'profil' %}">profil</a>
+    <br><br>
+    <form method="post">
         {% csrf_token %}
         <p>
             <label for="fname">Prénom</label>
@@ -23,19 +22,28 @@
             <input id ="lname" type="name" name="lname">
         </p>
         <p>
-            <label for="username">Nom d'utilisateur</label>
-            <input id="username" type="name" name="username">
-        </p>
-        <p>
             <label for="email">Email</label>
             <input id="email" type="email" name="email">
         </p>
         <p>
-            <label for="password">Mot de passe</label>
+            <label for="password">Mot de passe actuel</label>
             <input id ="password" type="passeword" name="password">
         </p>
+        <p>
+            <label for="newPassword">Nouveau mot de passe</label>
+            <input id ="newPassword" type="passeword" name="newPassword">
+        </p>
+        <p>
+            <label for="confirmNewPassword">Confirmer le mot de passe</label>
+            <input id ="confirmNewPassword" type="passeword" name="confirmNewPassword">
+        </p>
         <button type="submit">Valider</button>
+        
     </form>
-    {% endblock %}
+    {% if messages %}
+        {% for message in messages %}
+            <h5>{{ message }}</h5>
+        {% endfor %}
+    {% endif %}
 </body>
 </html>
