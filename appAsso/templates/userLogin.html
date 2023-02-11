@@ -14,6 +14,24 @@
 </head>
 {% block content %}
 <style>
+
+
+@keyframes transitionOne {
+            from{
+                opacity: 0;
+                transform: rotateX(-10deg);
+            }
+
+            to {
+                opacity: 1;
+                transform: rotateX(0);
+            }
+        }
+
+        .myContainer{
+            animation: transitionOne 5.0s;
+        }
+
     .myContainer {
         box-sizing: border-box;
         display: flex;

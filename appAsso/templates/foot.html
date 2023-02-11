@@ -11,13 +11,32 @@
     <title>Document</title>
 </head>
 
+<style>
+     @keyframes transitionOne {
+        from {
+            opacity: 0;
+            transform: rotateX(-10deg);
+        }
+
+        to {
+            opacity: 1;
+            transform: rotateX(0);
+        }
+    }
+
+    .container {
+        animation: transitionOne 2.5s;
+    }
+</style>
+
+
 <body>
     <br><br><br><br>
     {% block content %}
     <br><br><br><br>
     <!-- TEST FONCTIONNALITE RECHERCHE -->
     <div class="container">
-        <h1>Rechercher produit</h1>
+        <h1 style="color: white; font-family: 'Courier New', Courier, monospace;">Rechercher produit</h1>
         <nav class="navbar" style="background-color: black;">
             <div class="container-fluid" style="background-color: black;">
                 <form class="d-flex" role="search" method="get">
@@ -25,15 +44,15 @@
                         aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Rechercher</button><br>
                     {% if user.is_authenticated %}
-                        <a class="btn btn-outline-success" href="{% url 'add' %}" style="margin-left: 10px;"
-                            type="submit">Ajouter</a>
+                    <a class="btn btn-outline-success" href="{% url 'add' %}" style="margin-left: 10px;"
+                        type="submit">Ajouter</a>
                     {% endif %}
                 </form>
 
             </div>
         </nav>
 
-        {% if post %}
+        {% if post and user.is_authenticated%}
         {% for matos in post %}
         <!-- remplacer p par une card avec image + description et prix du produit -->
         <br><br>
@@ -42,8 +61,10 @@
             <div class="card-body">
                 <h5 class="card-title">{{ matos.nomProduit }}</h5>
                 <p class="card-text">Prix : {{matos.prix}}</p>
+                <h5 class="card-title">Description : </h5>
+                <p class="card-text">{{matos.description}}</p>
                 {% if user.is_authenticated %}
-                    <a href="{% url 'edit' %}" class="btn btn-primary">Modifier</a>
+                <a href="{% url 'edit' %}" class="btn btn-primary">Modifier</a>
                 {% endif %}
             </div>
         </div>
@@ -59,8 +80,8 @@
 
         <div class="row">
             <div class="container">
-                <h3>Liste des articles</h3>
-                {% if footp %}
+                <h3 style="color: white; font-family: 'Courier New', Courier, monospace;">Liste des articles</h3>
+                {% if footp and user.is_authenticated %}
                 {% for product in footp %}
                 <div class="card " style="width: 18rem; margin-left: 20px; margin-top: 20px;">
                     <img src="{% static 'media/test.jpg'%}" class="card-img-top" alt="image"
@@ -68,10 +89,12 @@
                     <div class="card-body">
                         <h5 class="card-title">{{product.nomProduit}}</h5>
                         <p class="card-text">{{product.prix}}</p>
+                        <h5 class="card-title">Description : </h5>
+                        <p class="card-text">{{product.description}}</p>
                         {% if user.is_authenticated %}
-                            <a href="{% url 'edit' %}" class="btn btn-primary">Modifier</a>
-                            <a href="{% url 'deleteItem' id=product.id %}" class="btn btn-danger"
-                                style="margin-left: 40px;">supprimer🚮</a>
+                        <a href="{% url 'edit' %}" class="btn btn-primary">Modifier</a>
+                        <a href="{% url 'deleteItem' id=product.id %}" class="btn btn-danger"
+                            style="margin-left: 40px;">supprimer🚮</a>
                         {% endif %}
                     </div>
                 </div>

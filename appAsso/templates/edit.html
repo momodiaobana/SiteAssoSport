@@ -15,6 +15,24 @@
     {% block content%}
     <style>
         
+        @keyframes transitionOne {
+            from{
+                opacity: 0;
+                transform: rotateX(-10deg);
+            }
+
+            to {
+                opacity: 1;
+                transform: rotateX(0);
+            }
+        }
+
+        h1{
+          animation: transitionOne 3.0s;
+        }
+        .myContainer{
+          animation: transitionOne 4.0s;
+        }
         .myContainer{
         display: flex;
         align-items: center;
@@ -72,7 +90,7 @@
             </div>
                         
             <div class="col-12">
-              <button type="submit" class="btn btn-outline-success" name="addItem">Ajouter</button>
+              <button type="submit" class="btn btn-outline-success" name="addItem">Modifier</button>
             </div>
           </form>
     </div>

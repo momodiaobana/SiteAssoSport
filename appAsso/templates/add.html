@@ -15,7 +15,24 @@
     {% block content%}
     <style>
         
+        @keyframes transitionOne {
+            from{
+                opacity: 0;
+                transform: rotateX(-10deg);
+            }
+
+            to {
+                opacity: 1;
+                transform: rotateX(0);
+            }
+        }
+
+        h1{
+          animation: transitionOne 5.0s;
+        }
+
         .myContainer{
+          animation: transitionOne 3.0s;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -36,7 +53,7 @@
     </style>
     <!-- -->
     <br><br><br><br><br>
-    <h1>Ajout d'élément</h1>
+    <h1 style="font-family: 'Courier New', Courier, monospace; color: aliceblue;">Ajout d'élément</h1>
     <div class="container myContainer" style="justify-content: center;">
         <form class="row g-3" method="POST">
             {%csrf_token%}

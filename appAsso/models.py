@@ -9,7 +9,8 @@ class Products(models.Model):
     cProduit = models.CharField(max_length=45, null=False)
     description = models.TextField(max_length=128, null=True)
     img = models.ImageField(upload_to="media", blank=True)
-    
+
+
     def __str__(self) -> str:
         return self.nomProduit
     

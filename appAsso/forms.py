@@ -17,3 +17,5 @@ class ProductsForm(ModelForm):
             'prix' : forms.TextInput(attrs={}),
             'cProduit' : forms.TextInput(attrs={}),
         }
+
+

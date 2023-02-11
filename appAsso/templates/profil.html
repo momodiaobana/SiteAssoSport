@@ -1,13 +1,48 @@
 {% extends 'base.html' %}
 
 {% block content%}
+
 <body>
+    <style>
+        h3{
+            color: aliceblue;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        p{
+            color:white;
+        }
+
+
+        
+    @keyframes transitionOne {
+        from {
+            opacity: 0;
+            transform: rotateX(-10deg);
+        }
+
+        to {
+            opacity: 1;
+            transform: rotateX(0);
+        }
+        
+    }
+
+    
+
+    .profilContainer{
+        animation : transitionOne 4.0s;
+    }
+
+    </style>
     <br><br><br>
-    <h3>Informations personnelles</h3>
+    <div class="container profilContainer">
+    <h3>Informations personnelles</h3><br>
     <p>Prénom: {{ first_name }}</p>
     <p>Nom: {{ last_name }}</p>
     <p>Nom d'utilisateur: {{ username }}</p>
-    <p>Email: {{ email }}</p>
-    <a href="{% url 'updateProfil' %}" style="text-decoration: none; color: white;">Mettre à jour le profil</a>
+    <p>Email: {{ email }}</p><br>
+    <a href="{% url 'updateProfil' %}" style="text-decoration: none; color: greenyellow;">Mettre à jour le profil</a>
+    </div>
 </body>
 {% endblock %}

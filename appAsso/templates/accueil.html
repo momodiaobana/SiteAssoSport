@@ -2,7 +2,6 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -50,11 +49,7 @@
       .table {
          animation: transitionOne 6.5s;
       }
-
       
-
-     
-
    </style>
 
    <div class="container">
@@ -79,18 +74,18 @@
 
          <div class="col-sm-4">
             <div class="card text-bg-success mb-3" style="max-width: 18rem;">
-               <div class="card-header"><strong>Prix moyen des articles</strong></div>
+               <div class="card-header"><strong>Prix moyen des articles(€)</strong></div>
                <div class="card-body">
-                  <h5 class="card-title">{{ prix_moyen }} €</h5>
+                  <h5 class="card-title">{{ prix_moyen }}</h5>
                </div>
             </div>
          </div>
 
          <div class="col-sm-4">
             <div class="card text-bg-danger mb-3" style="max-width: 18rem;">
-               <div class="card-header"><strong>Valeur du stock</strong></div>
+               <div class="card-header"><strong>Valeur du stock(€)</strong></div>
                <div class="card-body">
-                  <h5 class="card-title">{{ valeur_totale_stock }} € </h5>
+                  <h5 class="card-title">{{ valeur_totale_stock }} </h5>
                </div>
             </div>
          </div>
@@ -148,10 +143,6 @@
                   }
                },
             });
-
-
-
-
 
          </script>
       </div>

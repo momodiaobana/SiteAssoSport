@@ -4,6 +4,8 @@ from django.contrib.auth import login, logout, authenticate, get_user_model
 from django.contrib import messages
 from .models import Products #import de la base product venant du modele 
 from django.db.models import Sum
+
+
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
@@ -11,18 +13,9 @@ from django.contrib.auth.decorators import login_required
 user = get_user_model()
 
 
-###################### ACCUEIL ######################
-
-def base(request):
-    return render(request, "base.html")
 
 
-def index(request):
-    return render(request, "accueil.html")
-
-
-
-###################### UTILISATEUR ######################
+###################### CONNEXION / DECONNEXION ######################
 
 def userLogin(request):
     if request.method == 'POST':
@@ -32,7 +25,7 @@ def userLogin(request):
                authenticate(email=username_or_email, password=password)
         if user:
             login(request, user)
-            return redirect('index')
+            return redirect('accueil')
         else:
             messages.error(request, 'Les informations d\'identification sont incorrectes')
             return render(request, "userLogin.html", {'messages': messages})
@@ -60,9 +53,15 @@ def signup(request):
 
 
 
-###################### ACCUEIL ######################
+###################### PAGES PRINCIPALES ######################
 
 
+def base(request):
+    return render(request, "base.html")
+
+
+def index(request):
+    return render(request, "accueil.html")
 
 def accueil(request):
     if request.user.is_authenticated:
@@ -76,7 +75,8 @@ def accueil(request):
 
         ##### prix moyen du stock
         if count_all_items > 0:
-            prix_moyen = valeur_totale_stock / count_all_items
+            prix_moyen_ = valeur_totale_stock / count_all_items
+            prix_moyen = round(prix_moyen_,2)
         else: 
             prix_moyen = 0
         ##### valeur du stock des articles de boxe 
@@ -107,7 +107,7 @@ def accueil(request):
 
 
 
-########### PROFILE UTILISATEUR ###########
+########### PROFIL UTILISATEUR ###########
 
 
 def profil(request):
@@ -171,57 +171,21 @@ def userLogout(request):
 ##### Gestion des produits ###########
 
 
-def boxe(request):
-    boxep = Products.objects.filter(cProduit = "boxe")
-    context = {
-        'boxep': boxep
-        }
-
-    #provisoire  
+def pages(request, categorie): 
+    produits = Products.objects.filter(cProduit = categorie)
+    context = {'produits': produits}
     if request.method == 'GET':
         search = request.GET.get('search')
-        post = Products.objects.filter(cProduit="boxe").filter(nomProduit=search)
+        post = Products.objects.filter(cProduit=categorie).filter(nomProduit=search)
         context['post'] = post #merci à chatGPT pour cette ligne qui change tout 
-    return render(request, 'boxe.html',context)
     
+    return render(request, f'{categorie}.html', context)
 
-
-def foot(request):
-    footp = Products.objects.filter(cProduit ="foot")
-    context = {
-        'footp':footp
-    }
-    #rechercher des elements à travers la barre de recherche 
-    if request.method == 'GET':
-        search = request.GET.get('search')
-        post = Products.objects.all().filter(cProduit="foot").filter(nomProduit=search)
-        context['post'] = post
-            
-    return render(request, 'foot.html', context)
-
-
-
-
-def basket(request):
-    basketp = Products.objects.filter(cProduit ="basket")
-    context = {
-        'basketp':basketp
-    }
-
-    #rechercher des elements à travers la barre de recherche 
-    if request.method == 'GET':
-        search = request.GET.get('search')
-        post = Products.objects.all().filter(cProduit="basket").filter(nomProduit=search)
-        context['post'] = post
-    return render(request, 'basket.html', context)
-
-    
-
-
-
-def add(request): 
+def add(request):
+   
     if request.method == 'POST':
         nomProduit = request.POST['nomProduit']
+        
         prix = request.POST['prix']
         cProduit = request.POST['cProduit']
         description = request.POST['description']
@@ -230,13 +194,13 @@ def add(request):
     return render(request, "add.html", {})
 
 
-
 def edit(request, id):
     items = Products.objects.get(id = id)
     label = {
         'nomProduit':'',
         'prix':'',
         'cProduit':'',
+        'description':'', 
     }
         
     context = {
@@ -245,11 +209,10 @@ def edit(request, id):
     }
     return render(request, 'edit.html', context)
 
-    
 
 #supprimer un element de la base
 def deleteItem(request, id): 
     item = Products.objects.get(id = id)
     item.delete()
-    return redirect('index')
+    return redirect('accueil')
 

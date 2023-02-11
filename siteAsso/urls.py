@@ -7,6 +7,7 @@ from . import settings
 
 
 urlpatterns = [
+    
     path('', index, name='index'),
     path('', base, name='base'),
     path('accueil/', accueil, name='accueil'),
@@ -15,9 +16,9 @@ urlpatterns = [
     path('profil/', profil, name='profil'),
     path('updateProfil/', updateProfil, name='updateProfil'),
     path('add/', add, name='add'),
-    path('basket/', basket, name='basket'),
-    path('foot/', foot, name='foot'),
-    path('boxe/', boxe, name='boxe'),
+    path('basket/', pages, name='basket', kwargs={'categorie':'basket'}),
+    path('foot/', pages, name='foot', kwargs={'categorie':'foot'}),
+    path('boxe/', pages, name='boxe', kwargs={'categorie':'boxe'}),
     path('edit/<int:id>/', edit, name='edit'),
     path('deleteItem/<int:id>/', deleteItem, name = 'deleteItem'), 
     path('userLogout/', userLogout, name='userLogout'),

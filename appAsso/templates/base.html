@@ -35,9 +35,6 @@
 
 
 
-
-
-
   <header>
     <nav class="navbar navbar-expand-lg  fixed-top" style="background-color: white">
       <div class="container">
@@ -60,7 +57,7 @@
                   {% if user.is_authenticated %}
                   <ul class="logout-btn">
                      <button>
-                     <a href=""><img src="https://static.vecteezy.com/ti/vecteur-libre/p2/566937-icone-de-personne-gratuit-vectoriel.jpg" alt="Se connecter/S'inscrire" style="width: 10px; height: 10; position: relative; padding-left: 10%;"></a>
+                     <a href=""><img src="https://static.vecteezy.com/ti/vecteur-libre/p2/566937-icone-de-personne-gratuit-vectoriel.jpg" alt="Se connecter/S'inscrire" style="width: 10px; height: 10px; position: relative; padding-left: 10%;"></a>
                      </button>
                      <li>
                         <a data-bs-toggle="dropdown" href="{% url 'userLogout' %}" style="text-decoration: none; color: black;">Déconnexion</a>
@@ -85,9 +82,9 @@
 
   
   {% endblock %}
+<br>
 <footer>
-  <p>Made by : Eddy and Mouhamed Mountaga DIAO</p>
-
+  <p style="color:aliceblue; text-align: center;">Made by : Eddy MBITCHA and Mouhamed Mountaga DIAO</p>
 </footer>
 </body>
 </html>
