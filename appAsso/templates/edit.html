@@ -58,34 +58,30 @@
     <div class="container myContainer" style="justify-content: center;">
         <form class="row g-3" method="POST">
             {%csrf_token%}
+          
             <div class="col-md-6">
               <label for="inputEmail4" class="form-label">Nom produit</label>
-              <input type="text" class="form-control" id="" name="nomProduit" required>
-            </div>
+              <input type="text" class="form-control" id="" name="nomProduit" value="{{items.nomProduit}}">
+        </div>
 
             <div class=" form-outline col-md-6">
               <label for="typeNumber" class="form-label">prix</label>
-              <input type="number" min="1" class="form-control" id="" name="prix" required>
+              <input type="number" min="1" class="form-control" id="" name="prix" value="{{items.prix}}" >
             </div>
             
             <div class="mb-3">
-                <label for="formFile" class="form-label">Photo</label>
-                <input class="form-control" type="file" id="formFile" name="img">
-              </div>
-
-
-            <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description" placeholder="Décrivez l'article"></textarea>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description">{{items.description}}</textarea>
               </div>
 
             
             <div class="col-md-4">
               <label for="inputState" class="form-label">Catégorie</label>
               <select id="inputState" class="form-select" name="cProduit" required>
+                <option selected>{{items.cProduit}}</option>
                 <option>boxe</option>
-                <option>basket</option>
                 <option>foot</option>
+                <option>basket</option>
               </select>
             </div>
                         

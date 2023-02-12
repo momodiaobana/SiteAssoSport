@@ -24,12 +24,11 @@
             transform: rotateX(0);
         }
     }
-    .card{
-        animation: transitionOne 6.5s;
-        
-    }
 
-    
+    .card {
+        animation: transitionOne 6.5s;
+
+    }
 </style>
 
 
@@ -38,7 +37,7 @@
     {% block content %}
     <br><br><br><br>
     <!-- TEST FONCTIONNALITE RECHERCHE -->
-    <div class="container " >
+    <div class="container ">
         <h1 style="color: white; font-family: 'Courier New', Courier, monospace;">Rechercher produit</h1>
         <nav class="navbar" style="background-color: black;">
             <div class="container-fluid" style="background-color: black;">
@@ -60,17 +59,17 @@
         <!-- remplacer p par une card avec image + description et prix du produit -->
         <br><br>
         <div class="card" style="width: 18rem;">
-            <img src="#" class="card-img-top" alt="image">
+            <img src="{% static matos.img%}" class="card-img-top" alt="image">
             <div class="card-body">
                 <h5 class="card-title">{{ matos.nomProduit }}</h5>
-                <p class="card-text">Prix : {{matos.prix}}</p>
+                <p class="card-text" style="color:green" ><strong>{{matos.prix}}€</strong></p>
                 <h5 class="card-title">Description : </h5>
                 <p class="card-text">{{matos.description}}</p>
-                {% if user.is_authenticated %}
-                <a href="{% url 'edit' %}" class="btn btn-primary">Modifier</a>
-                <a href="{% url 'deleteItem' id=product.id %}" class="btn btn-danger"
+
+                <a href="{% url 'edit' id=matos.id%}" class="btn btn-success">Modifier</a>
+                <a href="{% url 'deleteItem' id=matos.id %}" class="btn btn-danger"
                     style="margin-left: 40px;">supprimer🚮</a>
-                {% endif %}
+
             </div>
         </div>
         <br>
@@ -86,23 +85,22 @@
         <div class="row">
             <div class="container listeArticle">
                 <h3 style="color: white; font-family: 'Courier New', Courier, monospace;">Liste des articles</h3>
-                {% if basketp and user.is_authenticated %}
+                {% if produits and user.is_authenticated %}
 
-                {% for product in basketp %}
+                {% for product in produits %}
 
                 <div class="card " style="width: 18rem; margin-left: 20px; margin-top: 20px;">
-                    <img src="{% static 'media/test.jpg'%}" class="card-img-top" alt="image"
+                    <img src="{% static product.img%}" class="card-img-top" alt="image"
                         style="margin-left: auto; margin-right: auto;">
                     <div class="card-body">
                         <h5 class="card-title">{{product.nomProduit}}</h5>
-                        <p class="card-text">{{product.prix}}</p>
+                        <p class="card-text" style="color:green"><strong>{{product.prix}}€</strong></p>
                         <h5 class="card-title">Description : </h5>
                         <p class="card-text">{{product.description}}</p>
-                        {% if user.is_authenticated %}
                         <a href="{% url 'edit' id=product.id %}" class="btn btn-success">modifier</a>
                         <a href="{% url 'deleteItem' id=product.id %}" class="btn btn-danger"
                             style="margin-left: 40px;">supprimer🚮</a>
-                            {% endif %}
+
                     </div>
                 </div>
 

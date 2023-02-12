@@ -87,16 +87,16 @@
         </form>
     
     </div>
-    {% if messages %}
-        {% for message in messages.list %}
+    {% if erreur != None %}
+        
             <br>
             <div class="container alert alert-danger">
                 <a href="{% url 'signup' %}" style="text-decoration: none; color: black;">
-                    <h4>{{ message }}. Voulez-vous vous inscrire ?</h4>
+                    <h4>{{ erreur }} Voulez-vous vous inscrire ?</h4>
                 </a>
             </div>
 
-        {% endfor %}
+      
     {% endif %}
 
  

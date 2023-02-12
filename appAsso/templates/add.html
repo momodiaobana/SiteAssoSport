@@ -55,7 +55,7 @@
     <br><br><br><br><br>
     <h1 style="font-family: 'Courier New', Courier, monospace; color: aliceblue;">Ajout d'élément</h1>
     <div class="container myContainer" style="justify-content: center;">
-        <form class="row g-3" method="POST">
+        <form class="row g-3" method="POST" enctype="multipart/form-data">
             {%csrf_token%}
             <div class="col-md-6">
               <label for="inputEmail4" class="form-label">Nom produit</label>
