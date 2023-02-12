@@ -10,7 +10,6 @@ class Products(models.Model):
     description = models.TextField(max_length=128, null=True)
     img = models.ImageField(upload_to="media", blank=True)
 
-
     def __str__(self) -> str:
         return self.nomProduit
     

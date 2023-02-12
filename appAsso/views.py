@@ -245,3 +245,15 @@ def deleteItem(request, id):
     item = Products.objects.get(id=id)
     item.delete()
     return redirect('accueil')
+
+############## API REST ###############
+from rest_framework.views import APIView
+from appAsso.serializers import ProductSerializer
+from rest_framework.response import Response
+
+class ProductAPIView(APIView): 
+    #initialisation d'un endpoint type get
+    def get(self, *args, **kwargs): 
+        product = Products.objects.all()
+        serializer = ProductSerializer(product, many = True)
+        return Response(serializer.data)

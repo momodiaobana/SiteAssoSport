@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from appAsso.views import *
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns, static
 from . import settings
@@ -23,5 +23,11 @@ urlpatterns = [
     path('deleteItem/<int:id>/', deleteItem, name = 'deleteItem'), 
     path('userLogout/', userLogout, name='userLogout'),
     path('admin/', admin.site.urls),
+
+    ##### API #####
+    path('api-auth/', include('rest_framework.urls')), 
+    path('api/product', ProductAPIView.as_view()),
+
+
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 
