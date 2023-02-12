@@ -207,9 +207,15 @@ def add(request):
         nomProduit = request.POST['nomProduit']
         prix = request.POST['prix']
         #gestion image 
-        img = request.FILES['img']
-        fs = FileSystemStorage()
-        name = fs.save(img.name, img)
+        try:
+            img = request.FILES['img']
+            fs = FileSystemStorage()
+            name = fs.save(img.name, img)
+        except UnboundLocalError as e:
+            print("erreur",e)
+        except Exception as e: 
+            print("erreur",e)
+
         cProduit = request.POST['cProduit']
         description = request.POST['description']
         newProduct = Products(nomProduit=nomProduit, prix=prix, cProduit= cProduit, img=img, description = description)
@@ -224,8 +230,6 @@ def edit(request, id):
         prix = request.POST['prix']
         cProduit = request.POST['cProduit']
         description = request.POST['description']
-      
-        
         items.nomProduit = nomProduit
         items.prix = prix
         items.cProduit = cProduit
