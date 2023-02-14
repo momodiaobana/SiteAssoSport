@@ -1,11 +1,9 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from django.contrib.auth import login, logout, authenticate, get_user_model
 from django.contrib import messages
 from .models import Products  # import de la base product venant du modele
 from django.core.files.storage import FileSystemStorage
-import random
-import string
+
 
 from django.contrib.auth.decorators import login_required
 # Create your views here.
