@@ -1,5 +1,4 @@
 from django.db import models
-import random, string 
 # Create your models here.
 
 

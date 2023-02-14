@@ -180,27 +180,9 @@ def pages(request, categorie):
         search = request.GET.get('search')
         post = Products.objects.filter(
             cProduit=categorie).filter(nomProduit=search)
-        # merci à chatGPT pour cette ligne qui change tout
         context['post'] = post
 
     return render(request, f'{categorie}.html', context)
-
-
-'''
-def foot(request):
-    footp = Products.objects.filter(cProduit ="foot")
-    context = {
-        'footp':footp
-    }
-    #rechercher des elements à travers la barre de recherche 
-    if request.method == 'GET':
-        search = request.GET.get('search')
-        post = Products.objects.all().filter(cProduit="foot").filter(nomProduit=search)
-        context['post'] = post
-            
-    return render(request, 'foot.html', context)
-'''
-
 
 def add(request):
     if request.method == 'POST':
