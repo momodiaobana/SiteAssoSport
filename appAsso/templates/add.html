@@ -1,99 +1,50 @@
 {% extends 'base.html'%}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
+{% block content%}
+  <head>
+    <link rel="stylesheet" href="{% static 'css/add.css' %}">
+  </head>
+  <body>
+    <h1>Ajout d'élément</h1>
+    <div class="container myContainer">
+      <form class="row g-3" method="POST" enctype="multipart/form-data">
+        {%csrf_token%}
+        <div class="col-md-6">
+          <label for="inputEmail4" class="form-label">Nom produit</label>
+          <input type="text" class="form-control" id="" name="nomProduit" required>
+        </div>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-    {% block content%}
-    <style>
-        
-        @keyframes transitionOne {
-            from{
-                opacity: 0;
-                transform: rotateX(-10deg);
-            }
-
-            to {
-                opacity: 1;
-                transform: rotateX(0);
-            }
-        }
-
-        h1{
-          animation: transitionOne 5.0s;
-        }
-
-        .myContainer{
-          animation: transitionOne 3.0s;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 5%;
-        }
-
-        .myContainer label{
-        color: white;
-        }
-    
-        h1 {
-        font-size: 36px;
-        margin-left:  14.5em;
-        font-family: 'Courier New', Courier, monospace;
-        color: white;
-        
-    }
-    </style>
-    <!-- -->
-    <br><br><br><br><br>
-    <h1 style="font-family: 'Courier New', Courier, monospace; color: aliceblue;">Ajout d'élément</h1>
-    <div class="container myContainer" style="justify-content: center;">
-        <form class="row g-3" method="POST" enctype="multipart/form-data">
-            {%csrf_token%}
-            <div class="col-md-6">
-              <label for="inputEmail4" class="form-label">Nom produit</label>
-              <input type="text" class="form-control" id="" name="nomProduit" required>
-            </div>
-
-            <div class=" form-outline col-md-6">
-              <label for="typeNumber" class="form-label">prix</label>
-              <input type="number" min="1" class="form-control" id="" name="prix" required>
-            </div>
+        <div class=" form-outline col-md-6">
+          <label for="typeNumber" class="form-label">prix</label>
+          <input type="number" min="1" class="form-control" id="" name="prix" required>
+        </div>
             
-            <div class="mb-3">
-                <label for="formFile" class="form-label">Photo</label>
-                <input class="form-control" type="file" id="formFile" name="img">
-              </div>
+        <div class="mb-3">
+          <label for="formFile" class="form-label">Photo</label>
+          <input class="form-control" type="file" id="formFile" name="img">
+        </div>
 
 
-            <div class="mb-3">
-                <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description" placeholder="Décrivez l'article"></textarea>
-              </div>
+        <div class="mb-3">
+          <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description" placeholder="Décrivez l'article"></textarea>
+        </div>
 
             
-            <div class="col-md-4">
-              <label for="inputState" class="form-label">Catégorie</label>
-              <select id="inputState" class="form-select" name="cProduit" required>
-                <option>boxe</option>
-                <option>basket</option>
-                <option>foot</option>
-              </select>
-            </div>
+        <div class="col-md-4">
+          <label for="inputState" class="form-label">Catégorie</label>
+          <select id="inputState" class="form-select" name="cProduit" required>
+            <option>boxe</option>
+            <option>basket</option>
+            <option>foot</option>
+          </select>
+        </div>
                         
-            <div class="col-12">
-              <button type="submit" class="btn btn-outline-success" name="addItem">Ajouter</button>
-            </div>
-          </form>
+        <div class="col-12">
+          <button type="submit" class="btn btn-outline-success" name="addItem">Ajouter</button>
+        </div>
+      </form>
     </div>
-    {% endblock %}
-</body>
-
-</html>
+  </body>
+{% endblock %}

@@ -42,15 +42,19 @@ def signup(request):
         username = request.POST.get('username')
         email = request.POST.get('email')
         password = request.POST.get('password')
+        confirme  = request.POST.get('cpassword')
         if user.objects.filter(username=username).exists() or user.objects.filter(email= email).exists():
             messages.error(request, 'Cet utilisateur existe déjà')
+            return redirect('signup')
         else:
-            utilisateur = user.objects.create_user(first_name=fname, last_name= lname, username = username, email = email, password = password)
-            login(request, utilisateur)
-            return redirect('accueil')
-
-    return render(request, "signup.html")
-
+            if password == confirme : 
+                utilisateur = user.objects.create_user(first_name=fname, last_name= lname, username = username, email = email, password = password)
+                login(request, utilisateur)
+                return redirect('accueil')
+            else  : 
+                messages.error(request, "Le mot de passe et la confirmation ne correspondent pas")
+                return redirect ('signup')
+    return render(request, 'signup.html')
 
 ###################### PAGES PRINCIPALES ######################
 
@@ -64,45 +68,43 @@ def index(request):
 
 
 def accueil(request):
-    if request.user.is_authenticated:
-        count_all_items = Products.objects.all().count()
-        count_boxe_items = Products.objects.filter(cProduit="boxe").count()
-        count_basket_items = Products.objects.filter(cProduit="basket").count()
-        count_foot_items = Products.objects.filter(cProduit="foot").count()
-        # valeur totale du stok
-        items = Products.objects.all()
-        valeur_totale_stock = sum(items.values_list('prix', flat=True))
 
-        # prix moyen du stock
-        if count_all_items > 0:
-            prix_moyen_ = valeur_totale_stock / count_all_items
-            prix_moyen = round(prix_moyen_, 2)
-        else:
-            prix_moyen = 0
-        # valeur du stock des articles de boxe
-        boxe_items = Products.objects.filter(cProduit="boxe")
-        valeur_stock_boxe = sum(boxe_items.values_list('prix', flat=True))
-        # valeur du stock des articles de foot
-        foot_items = Products.objects.filter(cProduit="foot")
-        valeur_stock_foot = sum(foot_items.values_list('prix', flat=True))
-        # valeur du stock des articles de basket
-        basket_items = Products.objects.filter(cProduit="basket")
-        valeur_stock_basket = sum(basket_items.values_list('prix', flat=True))
+    count_all_items = Products.objects.all().count()
+    count_boxe_items = Products.objects.filter(cProduit="boxe").count()
+    count_basket_items = Products.objects.filter(cProduit="basket").count()
+    count_foot_items = Products.objects.filter(cProduit="foot").count()
+    # valeur totale du stok
+    items = Products.objects.all()
+    valeur_totale_stock = sum(items.values_list('prix', flat=True))
 
-        context = {'count_all_items': count_all_items,
-                   'items': items,
-                   'count_boxe_items': count_boxe_items,
-                    'count_basket_items': count_basket_items,
-                    'count_foot_items': count_foot_items,
-                    'valeur_totale_stock': float(valeur_totale_stock),
-                    'prix_moyen': float(prix_moyen),
-                    'valeur_stock_boxe': float(valeur_stock_boxe),
-                    'valeur_stock_foot': float(valeur_stock_foot),
-                    'valeur_stock_basket': float(valeur_stock_basket),
-                   }
-        return render(request, "accueil.html", context)
-    return redirect('index')
+    # prix moyen du stock
+    if count_all_items > 0:
+        prix_moyen_ = valeur_totale_stock / count_all_items
+        prix_moyen = round(prix_moyen_, 2)
+    else:
+        prix_moyen = 0
+    # valeur du stock des articles de boxe
+    boxe_items = Products.objects.filter(cProduit="boxe")
+    valeur_stock_boxe = sum(boxe_items.values_list('prix', flat=True))
+    # valeur du stock des articles de foot
+    foot_items = Products.objects.filter(cProduit="foot")
+    valeur_stock_foot = sum(foot_items.values_list('prix', flat=True))
+    # valeur du stock des articles de basket
+    basket_items = Products.objects.filter(cProduit="basket")
+    valeur_stock_basket = sum(basket_items.values_list('prix', flat=True))
 
+    context = {'count_all_items': count_all_items,
+                'items': items,
+                'count_boxe_items': count_boxe_items,
+                'count_basket_items': count_basket_items,
+                'count_foot_items': count_foot_items,
+                'valeur_totale_stock': float(valeur_totale_stock),
+                'prix_moyen': float(prix_moyen),
+                'valeur_stock_boxe': float(valeur_stock_boxe),
+                'valeur_stock_foot': float(valeur_stock_foot),
+                'valeur_stock_basket': float(valeur_stock_basket),
+            }
+    return render(request, "accueil.html", context)
 
 ########### PROFIL UTILISATEUR ###########
 
@@ -122,44 +124,27 @@ def profil(request):
 
 def updateProfil(request):
     if request.method == 'POST':
-        request.user.first_name = request.POST['fname']
-        request.user.last_name = request.POST['lname']
-        request.user.email = request.POST['email']
+        username_or_email = request.POST['username']
         mdp = request.POST['password']
-        nouveauMdp = request.POST['newPassword']
-        confirme = request.POST['confirmNewPassword']
-        if mdp and not nouveauMdp and not confirme:
-            if request.user.check_password(mdp):
-                request.user.save()
-                messages.success(
-                    request, "Les informations ont été mis à jour avec succès!")
+        nouveauMdp = request.POST['newpassword']
+        confirme = request.POST['cpassword']
+        user = authenticate(username=username_or_email, password=mdp) or \
+            authenticate(email=username_or_email, password=mdp)
+        if user : 
+           if nouveauMdp != confirme:
+                messages.error(request, "Le nouveau mot de passe et la confirmation ne correspondent pas")
                 return redirect('updateProfil')
-            else:
-                messages.error(request, "Mot de passe incorrect")
+           elif nouveauMdp == mdp :
+                messages.error(request, "Le nouveau mot de passe et l'ancien sont identiques")
                 return redirect('updateProfil')
-        elif mdp and nouveauMdp and not confirme or (mdp and not nouveauMdp and confirme):
-            messages.error(
-                request, "Veuillez saisir les nouveaux mots de passe. Si vous ne souhaitez pas modifier votre mot de passe, ne remplissez pas votre nouveau mot de passe et la confirmation")
+           else :
+                user.set_password(nouveauMdp)
+                user.save()
+                messages.success(request, "Le mot de passe mis à jour avec succès!")
+                return redirect('profil')
+        else : 
+            messages.error(request, "Les informations d'identification sont incorrects")
             return redirect('updateProfil')
-        else:
-            if not request.user.check_password(mdp):
-                messages.error(request, "Le mot de passe actuel est incorrect")
-                return redirect('updateProfil')
-            else:
-                if nouveauMdp != confirme:
-                    messages.error(
-                        request, "Le nouveau mot de passe et la confirmation ne correspondent pas")
-                    return redirect('updateProfil')
-                elif nouveauMdp == mdp:
-                    messages.error(
-                        request, "Le nouveau mot de passe et l'ancien sont identiques")
-                    return redirect('updateProfil')
-                else:
-                    request.user.set_password(nouveauMdp)
-                    request.user.save()
-                    messages.success(
-                        request, "Le mot de passe mis à jour avec succès!")
-                    return redirect('profil')
     return render(request, 'updateProfil.html')
 
 

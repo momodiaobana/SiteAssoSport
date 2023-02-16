@@ -1,0 +1,35 @@
+@keyframes transitionOne {
+    from{
+        opacity: 0;
+        transform: rotateX(-10deg);
+    }
+
+    to {
+        opacity: 1;
+        transform: rotateX(0);
+    }
+}
+
+h1{
+    animation: transitionOne 5.0s;
+}
+
+.myContainer{
+    animation: transitionOne 3.0s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5%;
+}
+
+.myContainer label{
+    color: white;
+}
+
+h1 {
+    font-size: 36px;
+    margin-left:  14.5em;
+    font-family: 'Courier New', Courier, monospace;
+    color: white;
+
+}

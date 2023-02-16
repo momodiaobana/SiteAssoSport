@@ -1,230 +1,93 @@
 {% extends 'base.html'%}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Document</title>
-   <link rel="stylesheet" href="/static/feuille_style.css">
-</head>
-
-<body>
-   {% block content %}
-   <style>
-      h5 {
-         text-align: center;
-      }
-
-      .card-header {
-         text-align: center;
-      }
-      .logout-btn li {
-         display: none;
-      }
-
-      .logout-btn:hover li {
-         display: block;
-      }
-
-      /*animation des cards*/
-      @keyframes transitionOne {
-            from{
-                opacity: 0;
-                transform: rotateX(-10deg);
-            }
-
-            to {
-                opacity: 1;
-                transform: rotateX(0);
-            }
-        }
-
-      .card {
-            animation: transitionOne 2.5s;
-      }
 
 
-      .table {
-         animation: transitionOne 6.5s;
-      }
-      
-   </style>
-
-   <div class="container">
-      <h1 style="color: white; font-family: 'Courier New', Courier, monospace;">Chiffres en détail</h1>
-      <br>
-
-
-      <!-- NE TOUCHE A RIEN JE M'OCCUPE DE CETTE PAGE -->
-      <!-- J'INTEGRE LE RESTE PLUS TARD -->
-
-      <!--chiffres en card -->
-      <div class="row">
-         <div class="col-sm-4">
-
-            <div class="card text-bg-primary mb" style="max-width: 18rem;">
-               <div class="card-header"><strong>Total d'articles</strong> </div>
-               <div class="card-body">
-                  <h5 class="card-title">{{ count_all_items }}</h5>
-               </div>
-            </div>
-         </div>
-
-         <div class="col-sm-4">
-            <div class="card text-bg-success mb-3" style="max-width: 18rem;">
-               <div class="card-header"><strong>Prix moyen des articles(€)</strong></div>
-               <div class="card-body">
-                  <h5 class="card-title">{{ prix_moyen }}</h5>
-               </div>
-            </div>
-         </div>
-
-         <div class="col-sm-4">
-            <div class="card text-bg-danger mb-3" style="max-width: 18rem;">
-               <div class="card-header"><strong>Valeur du stock(€)</strong></div>
-               <div class="card-body">
-                  <h5 class="card-title">{{ valeur_totale_stock }} </h5>
-               </div>
-            </div>
-         </div>
-
-      </div>
-
-      <!-- chartJS -->
-      <br> <br> <br>
-
-      <div class="container">
-         <h1 style="color: white; font-family: 'Courier New', Courier, monospace;">Quantité d'articles par catégorie
-         </h1>
-         <br><br><br>
-         <div>
-            <canvas id="myChart"></canvas>
-         </div>
+{% block content %}
+   <body>
+      <head>
+         <title>Accueil</title>
+         <link rel="stylesheet" href="{% static 'css/accueil.css' %}">
+         <script src="{% static 'scripts/accueil.js' %}"></script>
          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-         <script class="bar">
-            const ctx = document.getElementById('myChart');
-
-            const labels = ['boxe', 'foot', 'basket'];
-            const barres = {
-
-               //Ne fait pas attention aux erreurs, tout fonctionne.
-               labels: labels,
-               datasets: [{
-                  label: 'quantité',
-                  data: [{{ count_boxe_items}}, {{ count_foot_items}}, {{ count_basket_items}}],
-
-
-                  backgroundColor: [
-                     'rgba(255, 99, 132, 0.2)',
-                     'rgba(255, 159, 64, 0.2)',
-                     'rgba(75, 192, 192, 0.2)'
-                  ],
-                  borderColor: [
-                     'rgb(255, 99, 132)',
-                     'rgb(255, 159, 64)',
-                     'rgba(75, 192, 192)'
-                  ],
-                  borderWidth: 1
-               }]
-
-            };
-            
-            //quantité d'article par catégorie
-            new Chart(ctx, {
-               type: 'bar',
-               data: barres,
-               options: {
-                  scales: {
-                     y: {
-                        beginAtZero: true
-                     }
-                  }
-               },
-            });
-
-         </script>
-      </div>
-
-      <!-- chartJS -->
-      <br> <br> <br>
+      </head>
       <div class="container">
-          <h1 style="color: white; font-family: 'Courier New', Courier, monospace;">Liste des articles en stock</h1>
-          <br> <br> <br>
-          <table class="table table-striped">
-              <thead class="thead-dark">
-                  <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Nom</th>
-                      <th scope="col">prix</th>
-                      <th scope="col">catégorie</th>
-                      <th scope="col">Description</th>
-                  </tr>
-              </thead>
-              <tbody class="bodytab">
-                  {% for item in items %}
-               
-                  <tr>
-                      <th scope="row" style="color:white">{{ item.id }}</th>
-                      <td style="color:white">{{ item.nomProduit }}</td>
-                      <td style="color:white">{{ item.prix}} €</td>
-                      <td style="color:white">{{ item.cProduit}}</td>
-                      <td style="color:white">{{ item.description}}</td>
-                  </tr>
-                  {% endfor %}
-              </tbody>
-          </table>
-      </div>
-
-      <br> <br> <br>
-        <h1 style="color: white; font-family: 'Courier New', Courier, monospace;">Valeur de chaque catégorie</h1>
-        <div class="container" style="width:50%; height: 50%;">
-
-            <br> <br> <br>
-            <div>
-                <canvas id="myChart2"></canvas>
+         <h1>Chiffres en détail</h1>
+         <!--chiffres en card -->
+         <div class="row">
+            <div class="col-sm-4">
+               <div class="card text-bg-primary mb">
+                  <div class="card-header"><strong>Total d'articles</strong> </div>
+                  <div class="card-body">
+                     <h5 class="card-title">{{ count_all_items }}</h5>
+                  </div>
+               </div>
             </div>
 
-            <script class="pie">
-                const ctx2 = document.getElementById('myChart2');
+            <div class="col-sm-4">
+               <div class="card text-bg-success mb-3">
+                  <div class="card-header"><strong>Prix moyen des articles(€)</strong></div>
+                  <div class="card-body">
+                     <h5 class="card-title">{{ prix_moyen }}</h5>
+                  </div>
+               </div>
+            </div>
 
-                
-                const pie = {
+            <div class="col-sm-4">
+               <div class="card text-bg-danger mb-3">
+                  <div class="card-header"><strong>Valeur du stock(€)</strong></div>
+                  <div class="card-body">
+                     <h5 class="card-title">{{ valeur_totale_stock }} </h5>
+                  </div>
+               </div>
+            </div>
 
-                    labels: [
-                        'Boxe',
-                        'Foot',
-                        'Basket'
-                    ],
-                    //Ne fait pas attention aux erreurs, tout fonctionne 
-                    datasets: [{
-                        label: 'Valeur en € ',
-                        data: [{{valeur_stock_boxe}}, {{valeur_stock_foot}}, {{valeur_stock_basket}}],
-                        backgroundColor: [
-                            'rgb(255, 99, 132)',
-                            'rgb(54, 162, 235)',
-                            'rgb(255, 205, 86)'
-                        ],
-                        hoverOffset: 3
-                    }]
+         </div>
 
-                };
-
-                //valeur de chaque caté 
-                new Chart(ctx2, {
-                    type: 'pie',
-                    data: pie,
-                });
-
+         <!-- chartJS -->
+         <div class="graphe">
+            <h1>Quantité d'articles par catégorie</h1>
+            <div>
+               <canvas id="myChart"></canvas>
+            </div>
+            <script class="bar">
+               generateBarChart({{count_boxe_items}}, {{count_foot_items}}, {{count_basket_items}}) 
             </script>
+         </div>
 
-        </div>
-
-
-
-   </div>
-   {% endblock %}
-</body>
-
-</html>
+         <!-- chartJS -->
+         <div class="tableau">
+            <table class="table table-striped">
+               <thead class="thead-dark">
+                  <tr>
+                     <th scope="col">#</th>
+                     <th scope="col">Nom</th>
+                     <th scope="col">prix</th>
+                     <th scope="col">catégorie</th>
+                     <th scope="col">Description</th>
+                  </tr>
+               </thead>
+               <tbody class="bodytab">
+                  {% for item in items %}
+                     <tr>
+                        <th scope="row">{{ item.id }}</th>
+                        <td>{{ item.nomProduit }}</td>
+                        <td>{{ item.prix}} €</td>
+                        <td>{{ item.cProduit}}</td>
+                        <td>{{ item.description}}</td>
+                     </tr>
+                  {% endfor %}
+               </tbody>
+            </table>
+         </div>
+         <h1>Valeur de chaque catégorie</h1>
+         <div class="cercle">
+            <div>
+               <canvas id="myChart2"></canvas>
+            </div>
+            <script class="pie">
+               generatePieChart({{valeur_stock_boxe}}, {{valeur_stock_foot}}, {{valeur_stock_basket}}) 
+            </script>
+         </div>
+      </div>
+   </body>
+{% endblock %}

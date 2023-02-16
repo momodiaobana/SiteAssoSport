@@ -1,0 +1,32 @@
+h3{
+    color: aliceblue;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+p{
+    color:white;
+}
+
+a{
+    text-decoration: none; 
+    color: greenyellow;
+}
+
+
+
+@keyframes transitionOne {
+from {
+    opacity: 0;
+    transform: rotateX(-10deg);
+}
+
+to {
+    opacity: 1;
+    transform: rotateX(0);
+}
+
+}
+
+.profilContainer{
+animation : transitionOne 4.0s;
+}

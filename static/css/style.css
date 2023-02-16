@@ -1,4 +1,54 @@
+body{
+    background-color: black;
+}
 
+
+.logout-btn li {
+    display: none;
+ }
+
+ .login-btn li a,
+ .logout-btn li a {
+    text-decoration: none; 
+    color: black;
+ }
+
+ .logout-btn:hover li {
+    display: block;
+ }
+
+ .login-btn li {
+    display: none;
+ }
+ 
+ .login-btn button img, 
+ .logout-btn button img{
+    width: 10px; 
+    height: 10px; 
+    position: relative;
+    padding-left: 10%
+ }
+
+
+
+ .login-btn:hover li {
+    display: block;
+ }
+
+
+ .navbar{
+    background-color: white;
+ }
+
+ .nav-link {
+    color: black ;
+ }
+
+
+
+
+
+ 
 .navbar .navbar-nav .nav-link:hover {
     color : black;
 }
@@ -102,4 +152,10 @@
 .login input[type="submit"]{
     font-size:20px; 
     margin-top:15px
+}
+
+footer p{
+    color:aliceblue; 
+    text-align: center;
+    margin-top: 10%;
 }
