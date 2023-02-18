@@ -223,6 +223,7 @@ class ProductsAPIView(APIView):
         serializer = ProductSerializer(product, many = True)
         return Response(serializer.data)
 
+#on definit le mode d'action sur readonly afin d'empecher un user de modifier les informations à sa guise 
 class ProductsViewset(ReadOnlyModelViewSet):
     #rend générique la vue en definissant plusieurs endpoint en meme temps pour une meme table 
     serializer_class = ProductSerializer

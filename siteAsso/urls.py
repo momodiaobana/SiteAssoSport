@@ -7,7 +7,7 @@ from rest_framework import routers
 
 #Router est une classe qui va permettre de rendre des vues génériques 
 router = routers.SimpleRouter()
-router.register('product', ProductsViewset, basename='product')
+router.register('products', ProductsViewset, basename='products')
 
 
 urlpatterns = [
