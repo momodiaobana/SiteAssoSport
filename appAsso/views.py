@@ -214,10 +214,17 @@ def deleteItem(request, id):
 from rest_framework.views import APIView
 from appAsso.serializers import ProductSerializer
 from rest_framework.response import Response
-
-class ProductAPIView(APIView): 
+from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
+class ProductsAPIView(APIView): 
     #initialisation d'un endpoint type get
     def get(self, *args, **kwargs): 
         product = Products.objects.all()
+        #paramètre many signifie qu'on a recevoir plusieurs data en meme temps 
         serializer = ProductSerializer(product, many = True)
         return Response(serializer.data)
+
+class ProductsViewset(ReadOnlyModelViewSet):
+    #rend générique la vue en definissant plusieurs endpoint en meme temps pour une meme table 
+    serializer_class = ProductSerializer
+    def get_queryset(self):
+        return Products.objects.all()

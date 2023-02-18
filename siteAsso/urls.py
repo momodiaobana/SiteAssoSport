@@ -3,7 +3,11 @@ from django.urls import path, include
 from appAsso.views import *
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns, static
 from . import settings
+from rest_framework import routers
 
+#Router est une classe qui va permettre de rendre des vues génériques 
+router = routers.SimpleRouter()
+router.register('product', ProductsViewset, basename='product')
 
 
 urlpatterns = [
@@ -26,7 +30,8 @@ urlpatterns = [
 
     ##### API #####
     path('api-auth/', include('rest_framework.urls')), 
-    path('api/product', ProductAPIView.as_view()),
+   # path('api/product', ProductsAPIView.as_view()), endpoint get 
+    path('', include(router.urls))
 
 
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
