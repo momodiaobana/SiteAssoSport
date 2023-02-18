@@ -68,7 +68,6 @@ def index(request):
 
 
 def accueil(request):
-
     count_all_items = Products.objects.all().count()
     count_boxe_items = Products.objects.filter(cProduit="boxe").count()
     count_basket_items = Products.objects.filter(cProduit="basket").count()

@@ -2,60 +2,67 @@
 {% load static %}
 
 {% block content %}
-    <head>
-        <link rel="stylesheet" href="{% static 'css/categories.css' %}">
-    </head>
-    
-    <body>
-        <div class="container">
-            <h1>Rechercher produit</h1>
-            <div class="container-fluid">
-                <form class="d-flex" role="search" method="get">
-                    <input class="form-control me-2" type="search" name="search" placeholder="Trouver des articles" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Rechercher</button>
-                    {% if user.is_authenticated %}
-                        <a class="btn btn-outline-success" href="{% url 'add' %}" type="submit">Ajouter</a>
-                    {% endif %}
-                </form>
-            </div>
-            {% if post and user.is_authenticated %}
-                {% for matos in post %}
-                    <!-- remplacer p par une card avec image + description et prix du produit -->
-                    <div class="card">
-                        <img src="{% static matos.img %}" class="card-img-top" alt="image">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ matos.nomProduit }}</h5>
-                            <p class="card-text" id="prix"><strong>{{matos.prix}}€</strong></p>
-                            <h5 class="card-title">Description : </h5>
-                            <p class="card-text">{{matos.description}}</p>
-                            {% if user.is_authenticated %}
-                                <a href="{% url 'edit' id=product.id %}" class="btn btn-success">modifier</a>
-                                <a href="{% url 'deleteItem' id=product.id %}" class="btn btn-danger">supprimer🚮</a>
-                            {% endif %}
-                        </div>
-                    </div>
-                {% endfor %}
-            {% endif %}
-            <div class="container">
-                <div class="row">
-                    {% for product in produits %}
-                    <div class="card col">
-                        <img src="{% static product.img %}" class="card-img-top" alt="image">
-                        <div class="card-body">
-                            <h5 class="card-title">{{product.nomProduit}}</h5>
-                            <p class="card-text" id="prix"><strong>{{product.prix}}€</strong></p>
-                            <h5 class="card-title">Description : </h5>
-                            <p class="card-text">{{product.description}}</p>
-                            {% if user.is_authenticated %}
-                                <a href="{% url 'edit' id=product.id %}" class="btn btn-success">modifier</a>
-                                <a href="{% url 'deleteItem' id=product.id %}" class="btn btn-danger">supprimer🚮</a>
-                            {% endif %}
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-            
+
+<head>
+    <link rel="stylesheet" href="{% static 'css/categories.css' %}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Rechercher produit</h1>
+        <div class="container-fluid">
+            <form class="d-flex" role="search" method="get">
+                <input class="form-control me-2" type="search" name="search" placeholder="Trouver des articles"
+                    aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Rechercher</button>
+                {% if user.is_authenticated %}
+                <a class="btn btn-outline-success" href="{% url 'add' %}" type="submit">Ajouter</a>
+                {% endif %}
+            </form>
         </div>
-    </body>
+        {% if post and user.is_authenticated %}
+        {% for matos in post %}
+        <!-- remplacer p par une card avec image + description et prix du produit -->
+        <div class="card">
+            <img src="{% static matos.img %}" class="card-img-top" alt="image">
+            <div class="card-body">
+                <h5 class="card-title">{{ matos.nomProduit }}</h5>
+                <p class="card-text" id="prix"><strong>{{matos.prix}}€</strong></p>
+                <h5 class="card-title">Description : </h5>
+                <p class="card-text">{{matos.description}}</p>
+                <a href="{% url 'edit' id=matos.id %}" class="btn btn-success">modifier</a>
+                <a href="{% url 'deleteItem' id=matos.id %}" class="btn btn-danger">supprimer🚮</a>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <br>
+        <p style="color:white;"> Article introuvable </p>
+        {% endif %}
+
+        <div class="container">
+            <div class="row">
+                {% if user.is_authenticated%}
+                {% for product in produits %}
+                <div class="card col">
+                    <img src="{% static product.img %}" class="card-img-top" alt="image">
+                    <div class="card-body">
+                        <h5 class="card-title">{{product.nomProduit}}</h5>
+                        <p class="card-text" id="prix"><strong>{{product.prix}}€</strong></p>
+                        <h5 class="card-title">Description : </h5>
+                        <p class="card-text">{{product.description}}</p>
+
+                        <a href="{% url 'edit' id=product.id %}" class="btn btn-success">modifier</a>
+                        <a href="{% url 'deleteItem' id=product.id %}" class="btn btn-danger">supprimer🚮</a>
+                    </div>
+
+                </div>
+                {% endfor %}
+                {% endif %}
+
+            </div>
+        </div>
+
+    </div>
+</body>
 {% endblock %}
