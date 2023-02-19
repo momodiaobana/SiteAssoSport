@@ -227,5 +227,15 @@ class ProductsAPIView(APIView):
 class ProductsViewset(ReadOnlyModelViewSet):
     #rend générique la vue en definissant plusieurs endpoint en meme temps pour une meme table 
     serializer_class = ProductSerializer
+    
+    #apply boxing filter to our endpoint 
     def get_queryset(self):
-        return Products.objects.all()
+        #get all boxing products
+     
+        #queryset = Products.objects.filter(cProduit="boxe")
+        queryset = Products.objects.all()
+        id = self.request.GET.get('produit_id')
+        #if there is somthing in 'produit_id' return an output with the specific object 
+        if id is not None: 
+            queryset = queryset.filter(id=id)
+        return queryset
